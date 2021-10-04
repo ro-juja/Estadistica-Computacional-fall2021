@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
+library(fs)
 ```
 
 # Lectura de Datos
@@ -31,6 +32,35 @@ for(i in 2:hojas){
 }
 
 ```
+```{r}
+
+read_excel("refugios_nayarit.xlsx")
+
+```
+
+
+
+```{r}
+
+path <- "refugios_nayarit.xlsx"
+
+rel <- path %>%
+  excel_sheets() %>%
+  set_names() %>%
+  map_df(read_excel,
+         path = path,
+         .id = "id") 
+
+df <- as.data.frame(rel)
+colnames(df) <- c("ID","No.", "Refugio", "Municipio", "Direccion", "Uso del Inmueble", "Servicios", "Capacidad de Personas", "Latitud", "Longitud", "Altitud", "Responsable", "Telefono")
+df <- df %>% filter(No.>0) %>% filter(No.!= 'No.')
+
+```
+
+
+
+
+
 
 
 
