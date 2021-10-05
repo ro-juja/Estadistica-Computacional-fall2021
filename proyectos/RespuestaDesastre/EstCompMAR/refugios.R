@@ -53,6 +53,25 @@ for(i in 2:n_hojas){
 ### Quitamos los NA
 datos <- datos |> drop_na()
 
+
+## Para Latitud incompleta, se agregan los primeros 3 caracteres de la Latitud anterior
+for(i in nrow(datos)) {
+  if(nchar(datos$Latitud[i])=!12){
+    x<-paste(substring(datos$Latitud[i-1],1,3),datos$Latitud[i],"\"")
+    datos$Latitud[i]=x
+  }
+}
+
+#Cambiamos caracteres para homogenizar las latitudes y longitudes
+  
+datos$Longitud <- chartr('|', '°', datos$Longitud)
+datos$Latitud  <- chartr('|', '°', datos$Latitud)
+datos$Longitud <- chartr('-', '.', datos$Longitud)
+datos$Latitud  <- chartr('-', '.', datos$Latitud)
+datos$Longitud <- chartr("`", "'", datos$Longitud)
+datos$Latitud  <- chartr("`", "'", datos$Latitud)
+
+
 convert_coordinates <- function(x){
   ### Segun Wikipedia: D_dec = D + M/60 + S/3600
   
