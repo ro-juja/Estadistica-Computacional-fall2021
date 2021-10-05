@@ -17,6 +17,7 @@ library(stringr)
 # install.packages("rmapshaper")
 # install.packages("jsonlite")
 # install.packages("highcharter")
+#install.packages("geosphere")
 
 library(rgdal)
 library(geojsonio)
@@ -24,6 +25,8 @@ library(spdplyr)
 library(rmapshaper)
 library(jsonlite)
 library(highcharter)
+
+library(geosphere)
 
 ### Mejoras:
 # 1. Estamos quitando todos los NA. Tal vez seria mejor solo quitar los
@@ -146,7 +149,7 @@ ubicacion_actual_df <- tibble(id = "Ubicacion actual",
 
 ### Funcion para calcular distancias entre coordenadas
 distancia <- function(x1, x2, y1, y2){
-  sqrt((x1 - x2)^2 + (y1 - y2)^2)
+  distHaversine(c(y1,x1), c(y2,x2))
 }
 
 ### Calculamos todas las distancias. Primero arreglamos los datos para luego
