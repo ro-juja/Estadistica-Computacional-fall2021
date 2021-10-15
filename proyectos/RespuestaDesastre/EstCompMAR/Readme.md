@@ -14,6 +14,12 @@ La limpieza de datos está hecha en otro archivo llamado `refugios.R`, donde inc
 
 ## Decisiones que Tomamos
 
+Eliminamos todos los valores en lo que no hay latitud, longitud o municipio. Una mejora que podría implementarse más adelante, sería recuperar los municipios faltantes a partir de las coordenadas con las que contamos.
+Quitamos los casos en los que las coordenadas no estaban en formato correcto. Se filtró de acuerdo al rango que detectamos que pertenecían los municipios de Nayarit.
+En caso que hubiera coordenadas repetidas, en el mapa se muestran los datos de los refugios con coordenadas repetidas.
+Si un municipio no aparece, la decisión que se tomó fue eliminarlo de los datos. 
+
+
 ## Dificultades
 Tuvimos muchas. Inicialmente, lo más complicado para nosotros fue entender Shiny. Nunca habíamos trabajado con Shiny, ni con leaflet, entonces nos tomó algo de tiempo acostumbrarnos a la interfaz y poder manejarla con algo de confianza. 
 
